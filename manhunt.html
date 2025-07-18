@@ -551,7 +551,6 @@
 
       const result = await response.json();
       console.log('Command sent successfully:', result);
-      showMessageBox('成功', `コマンドが正常に送信されました。\n応答: ${JSON.stringify(result, null, 2)}`);
 
     } catch (error) {
       console.error('Error sending command:', error);
