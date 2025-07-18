@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>UI全体レイアウト（中央配置）</title>
+<title>マンハント管理センター</title>
 <style>
   body {
     margin: 0;
@@ -407,7 +407,7 @@
         <section class="game-mode" aria-labelledby="game-mode-title">
           <h2 id="game-mode-title">ゲームモード</h2>
           <div class="game-mode-buttons" role="list" aria-label="ゲームモード選択">
-            <button role="listitem" type="button" data-command="/function kirakun:new_manhunt">新企画</button>
+            <button role="listitem" type="button" data-command="function kirakun:new_manhunt">新企画</button>
           </div>
         </section>
 
@@ -431,17 +431,17 @@
             </div>
           </div>
           <div class="tier-buttons" role="group" aria-label="Tier開放ボタン">
-            <button type="button" data-command="/open tier3">Tier3 開放</button>
-            <button type="button" data-command="/open tier2">Tier2 開放</button>
-            <button type="button" data-command="/open tier1">Tier1 開放</button>
+            <button type="button" data-command="open tier3">Tier3 開放</button>
+            <button type="button" data-command="open tier2">Tier2 開放</button>
+            <button type="button" data-command="open tier1">Tier1 開放</button>
           </div>
         </aside>
       </div>
 
       <div class="bottom-buttons">
-        <button type="button" data-command="/login">ログインカウント</button>
-        <button type="button" data-command="/auto">オート進行</button>
-        <button type="button" data-command="/kick all">/kick all</button>
+        <button type="button" data-command="login">ログインカウント</button>
+        <button type="button" data-command="auto">オート進行</button>
+        <button type="button" data-command="kick all">/kick all</button>
       </div>
     </section>
 
@@ -452,10 +452,10 @@
         <option>KidsRush_</option>
       </select>
       <button type="button" data-command="change_setting_select">変更</button>
-      <button type="button" data-command="/maintenance">メンテモード</button>
-      <button type="button" data-command="/auto_sequence start">オートシーケンス開始</button>
-      <button type="button" data-command="/auto_sequence end">オートシーケンス終了</button>
-      <button type="button" data-command="/pingall">ping</button>
+      <button type="button" data-command="maintenance">メンテモード</button>
+      <button type="button" data-command="auto_sequence start">オートシーケンス開始</button>
+      <button type="button" data-command="auto_sequence end">オートシーケンス終了</button>
+      <button type="button" data-command="pingall">ping</button>
     </nav>
 
   </div>
