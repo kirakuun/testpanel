@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>UI全体レイアウト（中央配置）</title>
+<style>
+  body {
+    margin: 0;
+    background-color: #1a1e2f;
+    color: #7cc27c;
+    font-family: "Meiryo", sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .top-bar {
+    background-color: #242a40;
+    height: 90px;
+    margin: 12px 24px 18px 24px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  /* 右上の時刻表示 */
+  .clock {
+    position: absolute;
+    top: 12px;
+    right: 24px;
+    font-size: 3.5rem;
+    color: #ecefec;
+    font-weight: bold;
+    user-select: none;
+    font-family: monospace;
+  }
+
+  .main-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin: 0 24px 24px 24px;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  .left-menu {
+    background-color: #242a40;
+    border-radius: 10px;
+    width: 180px;
+    height: 550px;
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .left-menu h2 {
+    margin: 0 0 12px 0;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .left-menu button, .left-menu select {
+    margin-bottom: 10px;
+    border-radius: 15px;
+    border: 1.5px solid #5a975a;
+    background: none;
+    color: #7cc27c;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 7px 10px;
+    user-select: none;
+  }
+  .left-menu select {
+    background-color: #1a1e2f;
+  }
+
+  .right-subcon {
+    background-color: #242a40;
+    border-radius: 10px;
+    width: 180px;
+    height: 550px;
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .right-subcon h2 {
+    margin: 0 0 12px 0;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .right-subcon button, .right-subcon select {
+    margin-bottom: 10px;
+    border-radius: 15px;
+    border: 1.5px solid #5a975a;
+    background: none;
+    color: #7cc27c;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 7px 10px;
+    user-select: none;
+  }
+  .right-subcon select {
+    background-color: #1a1e2f;
+  }
+
+  .center-panel {
+    background-color: #242a40;
+    border-radius: 10px;
+    padding: 24px 36px;
+    width: 1050px;
+    height: 550px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .top-commands {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 40px;
+    font-size: 0.9rem;
+    align-items: center;
+  }
+  .top-commands .cmd-btn {
+    padding: 7px 18px;
+    border-radius: 15px;
+    border: 1.5px solid #5a975a;
+    background: none;
+    color: #7cc27c;
+    cursor: pointer;
+    min-width: 85px;
+    text-align: center;
+    user-select: none;
+  }
+  .top-commands .cmd-btn.active {
+    background-color: #7cc27c(0, 53%, 58%);
+    border-color: #7cc27c;
+    color: #fff;
+  }
+  .arrow {
+    color: #7cc27c;
+    font-size: 1.4rem;
+    user-select: none;
+    margin: 0 10px;
+  }
+
+  .main-content {
+    display: flex;
+    justify-content: flex-start; /* 左寄せ */
+    gap: 36px;
+    flex-grow: 1;
+  }
+
+  .game-mode {
+    width: 400px; /* 幅を拡張 */
+    display: flex;
+    flex-direction: column;
+  }
+  .game-mode h2 {
+    margin: 0 0 14px 0;
+    font-weight: normal;
+    font-size: 1.3rem;
+  }
+  .game-mode-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px 12px;
+  }
+  .game-mode-buttons button {
+    border-radius: 15px;
+    border: 1.5px solid #5a975a;
+    background: none;
+    color: #7cc27c;
+    padding: 8px 0;
+    font-size: 1rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .game-mode-buttons button.active {
+    background-color: #none;
+    border-color: #7cc27c;
+    color: #7cc27c;
+  }
+
+  .tier-info {
+    width: 280px;
+    margin-left: auto; /* 右寄せ */
+    color: #7cc27c;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .tier-info h2 {
+    margin: 0 0 20px 0;
+    font-weight: normal;
+    font-size: 1.2rem;
+  }
+
+  .tier-limits {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    color: #96d5ff;
+    font-weight: bold;
+    font-size: 1.6rem;
+    align-items: flex-end; /* 下揃え */
+    height: 110px; /* 高さ固定 */
+  }
+  .tier-limits > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    white-space: normal;
+  }
+  .tier-limits > div:last-child {
+    justify-content: flex-start;
+    position: relative;
+  }
+
+  .reset-btn-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  .reset-btn-container button {
+    border-radius: 15px;
+    border: 1.5px solid #5a975a;
+    background: none;
+    color: #7cc27c;
+    padding: 7px 14px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    user-select: none;
+    height: 38px;
+    line-height: 1;
+  }
+
+  .tier-limits span.label {
+    font-size: 1rem;
+    font-weight: normal;
+  }
+  .tier-limits span.number {
+    font-size: 2.6rem;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  .tier-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  .tier-buttons button {
+    flex: 1;
+    border-radius: 15px;
+    border: 1.5px solid #5a975a;
+    background: none;
+    color: #7cc27c;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .bottom-buttons {
+    margin-top: 34px;
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+  }
+  .bottom-buttons button {
+    flex: 1;
+    border-radius: 15px;
+    border: 1.5px solid #5a975a;
+    background: none;
+    color: #7cc27c;
+    padding: 8px 0;
+    font-size: 1rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #5a975a;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #1a1e2f;
+  }
+</style>
+</head>
+<body>
+
+  <div class="top-bar" aria-label="上部情報バー">
+    <div class="clock" aria-live="polite" aria-atomic="true" aria-label="現在の日本時間"></div>
+  </div>
+
+  <div class="main-container">
+
+    <nav class="left-menu" aria-label="左メニュー">
+      <h2>メニュー</h2>
+      <button>メニュー1</button>
+      <button>メニュー2</button>
+      <button>メニュー3</button>
+      <button>メニュー4</button>
+      <button>メニュー5</button>
+    </nav>
+
+    <section class="center-panel" aria-label="ゲーム情報パネル">
+      <div class="top-commands" aria-label="コマンド一覧">
+        <button class="cmd-btn" type="button">/sub 3</button>
+        <span class="arrow">→</span>
+        <button class="cmd-btn" type="button">ホワリスOFF</button>
+        <span class="arrow">→</span>
+        <button class="cmd-btn" type="button">/sub 2</button>
+        <span class="arrow">→</span>
+        <button class="cmd-btn" type="button">/sub 1</button>
+        <span class="arrow">→</span>
+        <button class="cmd-btn" type="button">ホワリスON</button>
+      </div>
+
+      <div class="main-content">
+        <section class="game-mode" aria-labelledby="game-mode-title">
+          <h2 id="game-mode-title">ゲームモード</h2>
+          <div class="game-mode-buttons" role="list" aria-label="ゲームモード選択">
+            <button role="listitem" type="button">ごっこ</button>
+            <button role="listitem" type="button">いと</button>
+            <button role="listitem" type="button">はこ</button>
+            <button role="listitem" type="button">かくれ</button>
+            <button role="listitem" type="button">攻城戦</button>
+            <button role="listitem" type="button">だつ</button>
+            <button role="listitem" type="button">？？？</button>
+          </div>
+        </section>
+
+        <aside class="tier-info" aria-labelledby="tier-info-title">
+          <h2 id="tier-info-title">次開放 <strong>未決定</strong></h2>
+          <div class="tier-limits" aria-label="Tier上限">
+            <div>
+              <span class="label">Tier3上限</span>
+              <span class="number">0</span>
+            </div>
+            <div>
+              <span class="label">Tier2上限</span>
+              <span class="number">0</span>
+            </div>
+            <div>
+              <div class="reset-btn-container">
+                <button type="button">リセット</button>
+              </div>
+              <span class="label">Tier1上限</span>
+              <span class="number">0</span>
+            </div>
+          </div>
+          <div class="tier-buttons" role="group" aria-label="Tier開放ボタン">
+            <button type="button">Tier3 開放</button>
+            <button type="button">Tier2 開放</button>
+            <button type="button">Tier1 開放</button>
+          </div>
+        </aside>
+      </div>
+
+      <div class="bottom-buttons">
+        <button type="button">ログインカウント</button>
+        <button type="button">オート進行</button>
+        <button type="button">/kick all</button>
+      </div>
+    </section>
+
+    <nav class="right-subcon" aria-label="右サブメニュー">
+      <h2>サブコン</h2>
+      <select aria-label="設定1">
+        <option>KaitoRush_</option>
+        <option>KidsRush_</option>
+      </select>
+      <button>変更</button>
+      <button>メンテモード</button>
+      <button>オートシーケンス開始</button>
+      <button>オートシーケンス終了</button>
+      <button>ping</button>
+    </nav>
+
+  </div>
+
+<script>
+function updateClock() {
+  const clock = document.querySelector(".clock");
+  const now = new Date();
+  // 日本時間に調整 (UTC+9)
+  const jst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+
+  const hh = String(jst.getUTCHours()).padStart(2, "0");
+  const mi = String(jst.getUTCMinutes()).padStart(2, "0");
+  const ss = String(jst.getUTCSeconds()).padStart(2, "0");
+
+  clock.textContent = `${hh}:${mi}:${ss}`;
+}
+
+function sendCommand(command) {
+  fetch("https://mc.enderserver.jp:40015/execute-command", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ command: command })
+  })
+  .then(response => {
+    if (!response.ok) throw new Error(`HTTPエラー: ${response.status}`);
+    return response.json();
+  })
+  .then(data => {
+    console.log("送信成功:", data);
+  })
+  .catch(error => {
+    console.error("送信失敗:", error);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  const buttonSelectors = [
+    ".cmd-btn",
+    ".tier-buttons button",
+    ".left-menu button",
+    ".right-subcon button",
+    ".bottom-buttons button",
+    ".game-mode-buttons button"
+  ];
+
+  buttonSelectors.forEach(selector => {
+    document.querySelectorAll(selector).forEach(button => {
+      button.addEventListener("click", () => {
+        const command = button.textContent.trim();
+        console.log(`[コマンド実行] ${command}`);
+        sendCommand(command);
+      });
+    });
+  });
+});
+</script>
+
+</body>
+</html>
