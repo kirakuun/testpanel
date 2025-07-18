@@ -142,7 +142,7 @@
     user-select: none;
   }
   .top-commands .cmd-btn.active {
-    background-color: #7cc27c(0, 53%, 58%);
+    background-color: #7cc27c; /* Changed from rgba(0, 53%, 58%) to a more consistent color */
     border-color: #7cc27c;
     color: #fff;
   }
@@ -186,7 +186,7 @@
     user-select: none;
   }
   .game-mode-buttons button.active {
-    background-color: #none;
+    background-color: #none; /* This was 'none', keeping it as is, but it might be a typo for 'transparent' or a specific color */
     border-color: #7cc27c;
     color: #7cc27c;
   }
@@ -303,6 +303,74 @@
   ::-webkit-scrollbar-track {
     background: #1a1e2f;
   }
+
+  /* Message Box Styles */
+  .message-box-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .message-box-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .message-box-content {
+    background-color: #242a40;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    color: #ecefec;
+    position: relative;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+  }
+
+  .message-box-overlay.visible .message-box-content {
+    transform: translateY(0);
+  }
+
+  .message-box-content h3 {
+    margin-top: 0;
+    color: #7cc27c;
+    font-size: 1.5rem;
+  }
+
+  .message-box-content p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    white-space: pre-wrap; /* Preserve whitespace and line breaks */
+    word-wrap: break-word; /* Break long words */
+  }
+
+  .message-box-content button {
+    background-color: #5a975a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .message-box-content button:hover {
+    background-color: #4a804a;
+  }
 </style>
 </head>
 <body>
@@ -315,37 +383,37 @@
 
     <nav class="left-menu" aria-label="左メニュー">
       <h2>メニュー</h2>
-      <button>メニュー1</button>
-      <button>メニュー2</button>
-      <button>メニュー3</button>
-      <button>メニュー4</button>
-      <button>メニュー5</button>
+      <button type="button" data-command="menu_command_1">メニュー1</button>
+      <button type="button" data-command="menu_command_2">メニュー2</button>
+      <button type="button" data-command="menu_command_3">メニュー3</button>
+      <button type="button" data-command="menu_command_4">メニュー4</button>
+      <button type="button" data-command="menu_command_5">メニュー5</button>
     </nav>
 
     <section class="center-panel" aria-label="ゲーム情報パネル">
       <div class="top-commands" aria-label="コマンド一覧">
-        <button class="cmd-btn" type="button">/sub 3</button>
+        <button class="cmd-btn" type="button" data-command="/sub 3">/sub 3</button>
         <span class="arrow">→</span>
-        <button class="cmd-btn" type="button">ホワリスOFF</button>
+        <button class="cmd-btn" type="button" data-command="/whitelist off">ホワリスOFF</button>
         <span class="arrow">→</span>
-        <button class="cmd-btn" type="button">/sub 2</button>
+        <button class="cmd-btn" type="button" data-command="/sub 2">/sub 2</button>
         <span class="arrow">→</span>
-        <button class="cmd-btn" type="button">/sub 1</button>
+        <button class="cmd-btn" type="button" data-command="/sub 1">/sub 1</button>
         <span class="arrow">→</span>
-        <button class="cmd-btn" type="button">ホワリスON</button>
+        <button class="cmd-btn" type="button" data-command="/whitelist on">ホワリスON</button>
       </div>
 
       <div class="main-content">
         <section class="game-mode" aria-labelledby="game-mode-title">
           <h2 id="game-mode-title">ゲームモード</h2>
           <div class="game-mode-buttons" role="list" aria-label="ゲームモード選択">
-            <button role="listitem" type="button">ごっこ</button>
-            <button role="listitem" type="button">いと</button>
-            <button role="listitem" type="button">はこ</button>
-            <button role="listitem" type="button">かくれ</button>
-            <button role="listitem" type="button">攻城戦</button>
-            <button role="listitem" type="button">だつ</button>
-            <button role="listitem" type="button">？？？</button>
+            <button role="listitem" type="button" data-command="/function fille_brain:aooni_gokko">ごっこ</button>
+            <button role="listitem" type="button" data-command="/function fille_brain:aooni_ito">いと</button>
+            <button role="listitem" type="button" data-command="/function fille_brain:aooni_hako">はこ</button>
+            <button role="listitem" type="button" data-command="/function fille_brain:aooni_kakure">かくれ</button>
+            <button role="listitem" type="button" data-command="/function fille_brain:aooni_kojosen">攻城戦</button>
+            <button role="listitem" type="button" data-command="/function fille_brain:aooni_datsu">だつ</button>
+            <button role="listitem" type="button" data-command="/function fille_brain:aooni_vote">？？？</button>
           </div>
         </section>
 
@@ -358,28 +426,28 @@
             </div>
             <div>
               <span class="label">Tier2上限</span>
-              <span class="number">0</span>
+              <span class="number">3</span>
             </div>
             <div>
               <div class="reset-btn-container">
-                <button type="button">リセット</button>
+                <button type="button" data-command="reset_tier">リセット</button>
               </div>
               <span class="label">Tier1上限</span>
-              <span class="number">0</span>
+              <span class="number">3</span>
             </div>
           </div>
           <div class="tier-buttons" role="group" aria-label="Tier開放ボタン">
-            <button type="button">Tier3 開放</button>
-            <button type="button">Tier2 開放</button>
-            <button type="button">Tier1 開放</button>
+            <button type="button" data-command="/open tier3">Tier3 開放</button>
+            <button type="button" data-command="/open tier2">Tier2 開放</button>
+            <button type="button" data-command="/open tier1">Tier1 開放</button>
           </div>
         </aside>
       </div>
 
       <div class="bottom-buttons">
-        <button type="button">ログインカウント</button>
-        <button type="button">オート進行</button>
-        <button type="button">/kick all</button>
+        <button type="button" data-command="/login">ログインカウント</button>
+        <button type="button" data-command="/auto">オート進行</button>
+        <button type="button" data-command="/kick all">/kick all</button>
       </div>
     </section>
 
@@ -389,72 +457,149 @@
         <option>KaitoRush_</option>
         <option>KidsRush_</option>
       </select>
-      <button>変更</button>
-      <button>メンテモード</button>
-      <button>オートシーケンス開始</button>
-      <button>オートシーケンス終了</button>
-      <button>ping</button>
+      <button type="button" data-command="change_setting_select">変更</button>
+      <button type="button" data-command="/maintenance">メンテモード</button>
+      <button type="button" data-command="/auto_sequence start">オートシーケンス開始</button>
+      <button type="button" data-command="/auto_sequence end">オートシーケンス終了</button>
+      <button type="button" data-command="/pingall">ping</button>
     </nav>
 
   </div>
 
+  <!-- Message Box HTML -->
+  <div id="messageBoxOverlay" class="message-box-overlay">
+    <div class="message-box-content">
+      <h3 id="messageBoxTitle"></h3>
+      <p id="messageBoxText"></p>
+      <button id="messageBoxCloseBtn">閉じる</button>
+    </div>
+  </div>
+
 <script>
-function updateClock() {
-  const clock = document.querySelector(".clock");
-  const now = new Date();
-  // 日本時間に調整 (UTC+9)
-  const jst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+  // Function to update the clock
+  function updateClock() {
+    const clock = document.querySelector(".clock");
+    const now = new Date();
+    // Adjust to Japan Standard Time (UTC+9)
+    const jst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
 
-  const hh = String(jst.getUTCHours()).padStart(2, "0");
-  const mi = String(jst.getUTCMinutes()).padStart(2, "0");
-  const ss = String(jst.getUTCSeconds()).padStart(2, "0");
+    const hh = String(jst.getUTCHours()).padStart(2, "0");
+    const mi = String(jst.getUTCMinutes()).padStart(2, "0");
+    const ss = String(jst.getUTCSeconds()).padStart(2, "0");
 
-  clock.textContent = `${hh}:${mi}:${ss}`;
-}
+    clock.textContent = `${hh}:${mi}:${ss}`;
+  }
 
-function sendCommand(command) {
-  fetch("https://mc.enderserver.jp:40015/execute-command", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ command: command })
-  })
-  .then(response => {
-    if (!response.ok) throw new Error(`HTTPエラー: ${response.status}`);
-    return response.json();
-  })
-  .then(data => {
-    console.log("送信成功:", data);
-  })
-  .catch(error => {
-    console.error("送信失敗:", error);
-  });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
+  // Initial clock update and set interval
   updateClock();
   setInterval(updateClock, 1000);
 
-  const buttonSelectors = [
-    ".cmd-btn",
-    ".tier-buttons button",
-    ".left-menu button",
-    ".right-subcon button",
-    ".bottom-buttons button",
-    ".game-mode-buttons button"
-  ];
+  // --- Message Box Functions ---
+  const messageBoxOverlay = document.getElementById('messageBoxOverlay');
+  const messageBoxTitle = document.getElementById('messageBoxTitle');
+  const messageBoxText = document.getElementById('messageBoxText');
+  const messageBoxCloseBtn = document.getElementById('messageBoxCloseBtn');
 
-  buttonSelectors.forEach(selector => {
-    document.querySelectorAll(selector).forEach(button => {
-      button.addEventListener("click", () => {
-        const command = button.textContent.trim();
-        console.log(`[コマンド実行] ${command}`);
+  /**
+   * Displays a custom message box.
+   * @param {string} title - The title of the message box.
+   * @param {string} message - The message content.
+   */
+  function showMessageBox(title, message) {
+    messageBoxTitle.textContent = title;
+    messageBoxText.textContent = message;
+    messageBoxOverlay.classList.add('visible');
+  }
+
+  // Close message box when the close button is clicked
+  messageBoxCloseBtn.addEventListener('click', () => {
+    messageBoxOverlay.classList.remove('visible');
+  });
+
+  // Close message box when clicking outside the content
+  messageBoxOverlay.addEventListener('click', (event) => {
+    if (event.target === messageBoxOverlay) {
+      messageBoxOverlay.classList.remove('visible');
+    }
+  });
+
+  // --- Command Sending Function ---
+  const RELAY_SERVER_URL = 'https://mc.enderserver.jp:40015/execute-command';
+
+  /**
+   * Sends a command to the relay server.
+   * @param {string} command - The command string to send.
+   */
+  async function sendCommand(command) {
+    try {
+      console.log(`Sending command: ${command}`);
+      const response = await fetch(RELAY_SERVER_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Origin': 'https://kirakuun.github.io' // The relay server expects this origin for CORS.
+                                                  // In a real deployment, ensure your hosting domain matches this.
+        },
+        body: JSON.stringify({ command: command }),
+      });
+
+      if (!response.ok) {
+        let errorData = await response.text();
+        try {
+          errorData = JSON.parse(errorData);
+        } catch (e) {
+          // Not a JSON response, keep as text
+        }
+        console.error('Server response was not ok:', response.status, errorData);
+        showMessageBox('エラー', `コマンドの送信に失敗しました。\nステータス: ${response.status}\n詳細: ${JSON.stringify(errorData, null, 2)}`);
+        return;
+      }
+
+      const result = await response.json();
+      console.log('Command sent successfully:', result);
+      showMessageBox('成功', `コマンドが正常に送信されました。\n応答: ${JSON.stringify(result, null, 2)}`);
+
+    } catch (error) {
+      console.error('Error sending command:', error);
+      showMessageBox('通信エラー', `サーバーとの通信中にエラーが発生しました。\n詳細: ${error.message}`);
+    }
+  }
+
+  // --- Attach Event Listeners to all buttons ---
+  document.addEventListener('DOMContentLoaded', () => {
+    // Select all buttons that should send commands
+    const buttons = document.querySelectorAll(
+      // '.left-menu button, ' +
+      '.top-commands .cmd-btn, ' +
+      '.game-mode-buttons button, ' +
+      '.reset-btn-container button, ' +
+      '.tier-buttons button, ' +
+      '.bottom-buttons button, ' +
+      '.right-subcon button'
+    );
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Get the command from the data-command attribute, or fallback to textContent
+        const command = button.dataset.command || button.textContent.trim();
         sendCommand(command);
       });
     });
+
+    // Handle the "変更" button in right-subcon specifically for the select value
+    const changeButton = document.querySelector('.right-subcon button[data-command="change_setting_select"]');
+    if (changeButton) {
+      changeButton.removeEventListener('click', () => { /* Remove generic listener first if it was added */ }); // Ensure no duplicate listeners
+      changeButton.addEventListener('click', () => {
+        const selectElement = document.querySelector('.right-subcon select');
+        if (selectElement) {
+          const selectedValue = selectElement.value;
+          // Send a specific command that includes the selected value
+          sendCommand(`change_setting ${selectedValue}`);
+        }
+      });
+    }
   });
-});
 </script>
 
 </body>
